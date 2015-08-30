@@ -1,0 +1,77 @@
+/* CSS declarations go here */
+
+body {
+    text-align: center;
+}
+
+.legend li {
+    display: inline;
+    list-style-type: none;
+    padding-right: 20px;
+    text-align: right;
+}
+
+.legend .circle:before {
+    content: ' \25CF';
+    font-size: 20px;
+    padding-right: 5px;
+}
+
+
+.legend .green .circle  {
+    color: green;
+}
+
+.legend .orange .circle  {
+    color: orange;
+}
+
+.legend .red .circle  {
+    color: red;
+}
+
+.week {
+    margin : 10px;
+}
+
+.tuesday {
+    border : 1px solid #CCC;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    padding: 5px;
+    margin : 5px 0;
+    height: 150px;
+}
+
+.tuesday h5 {
+    margin: 0;
+    padding-bottom:5px;
+    font-size: 1.1em;
+    text-transform: uppercase;
+    font-weight: bold;
+    color:#333;
+}
+
+.tuesday h5 small {
+    color:#BBB;
+}
+
+.attendances {
+    margin: 0;
+}
+.attendances li {
+    margin:  0;
+}
+
+.tuesday.green {
+    border-color: green;
+}
+
+.tuesday.orange {
+    border-color: orange;
+}
+
+.tuesday.red {
+    border-color: red;
+}

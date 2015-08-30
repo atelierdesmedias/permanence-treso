@@ -1,0 +1,92 @@
+<head>
+  <title>Atelier des Médias - Permanence Compta</title>
+  <link href='http://fonts.googleapis.com/css?family=Raleway:400,100,800' rel='stylesheet' type='text/css'>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Calendrier des permanences compta ADM</h1>
+
+        <p>
+            {{# if currentUser}}
+                Bonjour {{> loginButtons}}. Sélectionnez vos jours de présence.
+            {{ else}}
+                Connectez-vous ou créer votre compte  : {{> loginButtons}}
+            {{/if}}
+        </p>
+
+        {{> tuesdays}}
+    </div>
+</body>
+
+
+<template name="tuesdays">
+
+    {{#if currentUser}}
+        <p>Vous avez {{scheduled}} permanences dans votre calendrier.</p>
+        <a href="#" data-action="filter/currentUser" class="button">Voir mes permanences</a>
+        <a href="#" data-action="filter/reset" class="button">Voir toutes les permanences</a>
+    {{/if}}
+
+    <ul class="legend">
+        <li class="red"><span class="circle"></span>Pas de permanence.</li>
+        <li class="orange"><span class="circle"></span>Inscrits insuffisants.</li>
+        <li class="green"><span class="circle"></span>Permanence assurée.</li>
+    </ul>
+
+    <div>
+        {{#each tuesdays}}
+            {{> tuesdayRow}}
+        {{/ each}}
+    </div>
+
+</template>
+
+<template name="tuesdayRow">
+    <div class="row">
+        {{#each row}}
+                {{> tuesday}}
+        {{/ each}}
+    </div>
+</template>
+
+<template name="tuesday">
+    <div class="three columns week">
+        <div class="tuesday {{ color }}">
+            <h5>
+                <small>{{year}} - Semaine {{week}}</small>
+                <br>
+                 {{ date }}
+            </h5>
+            {{# if attendances.length }}
+            {{ else }}
+                <p>Pas de permanence.</p>
+            {{/if}}
+            <ul class="attendances">
+            {{#each attendances}}
+                <li>{{username}}</li>
+            {{/ each}}
+            </ul>
+        </div>
+        {{#if currentUser }}
+            {{> attend}}
+        {{/if}}
+    </div>
+</template>
+
+
+<template name="attend">
+    {{#if attending }}
+        <a class="button" href="#" data-action="attendance/delete">
+            J'annule
+        </a>
+    {{ else }}
+        <a data-action="attendance/add" class="button" href="#">
+            Je serai là
+        </a>
+    {{/ if }}
+</template>
+
+
+
+
