@@ -55,8 +55,6 @@ if (Meteor.isClient) {
             if (filter == null) {
                 tuesdays = getAllTuesdays();
             } else if (filter == "currentUser") {
-                
-                console.log(filter);
                 tuesdays = Attendances.find({'owner' : Meteor.userId() }).fetch().map(function(d){
                     return getTuesday(d.weekNumber, d.year);
                 })
@@ -65,10 +63,12 @@ if (Meteor.isClient) {
             // parse data or display
             for (var i = 0; i < tuesdays.length; i++) {
 
-                var date = moment(new Date(tuesdays[i])).locale('fr'),
+                var date = moment(tuesdays[i], "YYYY MM DD").locale('fr'),
                     week = date.isoWeek(),
                     year = date.year(),
                     attending = false;
+
+                console.log(date);
 
                 var attendances = Attendances.find({'weekNumber' : week, 'year' : year }).fetch();
 
@@ -80,7 +80,6 @@ if (Meteor.isClient) {
                     attending = (attendances.map(function (d) { return d.owner }).indexOf(Meteor.userId()) != -1)? true : false;
                 }
 
-                // console.log(attendances);
                 dates.push({
                     year : year,
                     date : date.format("dddd Do  MMMM"),
@@ -90,7 +89,7 @@ if (Meteor.isClient) {
                     attendances : attendances
                 });
             } 
-            console.log(dates.length);
+
 
             var rowDates = [];
             for (var i = 0; i <dates.length; i+rowSize) {
